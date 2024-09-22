@@ -782,13 +782,12 @@ var GUI = {
         var isFullWidth = window.innerWidth < 600;
         var menu = lib.ce("div", {
             style: `
-                background: linear-gradient(270deg, #BA55D3, #00BFFF, #BA55D3);
-                background-size: 400% 400%;
-                animation: gradientAnimation 5s ease infinite;
-                opacity: 0.3;
-                border-radius: 3px;
-                position: absolute;
-                color: #BA55D3;
+                background: #000; 
+                opacity: 0.3; 
+                border-radius: 3px; 
+                position: absolute; 
+                color: #BA55D3; 
+                transition: opacity 500ms;
                 z-index: 2000;
             `,
             onmousemove: function() {
@@ -802,13 +801,21 @@ var GUI = {
         // Добавьте стиль анимации в head
         var style = document.createElement('style');
         style.innerHTML = `
-            @keyframes gradientAnimation {
-                0% { background-position: 0% 50%; }
-                50% { background-position: 100% 50%; }
-                100% { background-position: 0% 50%; }
+            @keyframes colorAnimation {
+                0% { color: #BA55D3; }
+                25% { color: #FF69B4; }
+                50% { color: #00BFFF; }
+                75% { color: #BA55D3; }
+                100% { color: #FF69B4; }
+            }
+            .color-animate {
+                animation: colorAnimation 5s infinite;
             }
         `;
         document.head.appendChild(style);
+        
+        // Добавьте класс анимации к элементу
+        menu.classList.add('color-animate');
         if(isFullWidth) {
             //menu.style.left = "0";
             menu.style.top = "0";
